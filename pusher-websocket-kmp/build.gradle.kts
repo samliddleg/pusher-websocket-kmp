@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "uk.co.lidbit"
-version = "0.1.2"
+version = "0.1.3"
 
 kotlin {
     
@@ -34,7 +34,7 @@ kotlin {
         }
         framework {
             baseName = "PusherWebsocketKmp"
-            isStatic = true
+            isStatic = false
         }
     }
 
