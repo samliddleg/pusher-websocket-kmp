@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "uk.co.lidbit"
-version = "0.1.1"
+version = "0.1.2"
 
 kotlin {
     
@@ -37,8 +37,14 @@ kotlin {
             isStatic = true
         }
     }
-    
-    jvm()
+
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
+
+    jvmToolchain(17)
     
     sourceSets {
         jvmMain.dependencies {
