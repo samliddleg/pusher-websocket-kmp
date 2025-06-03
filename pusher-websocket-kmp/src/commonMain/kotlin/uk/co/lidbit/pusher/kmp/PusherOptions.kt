@@ -5,6 +5,7 @@ class PusherOptions private constructor(
     val proxy: Proxy?,
     val cluster: String?,
     val activityTimeout: Long?,
+    val authEndpoint: String?,
     val channelAuthorizer: ChannelAuthorizer?,
     val maxReconnectGapInSeconds: Int?,
     val maxReconnectionAttempts: Int?,
@@ -22,6 +23,7 @@ class PusherOptions private constructor(
         private var cluster: String? = null
         private var activityTimeout: Long? = null
         private var channelAuthorizer: ChannelAuthorizer? = null
+        private var authEndpoint: String? = null
         private var maxReconnectGapInSeconds: Int? = null
         private var maxReconnectionAttempts: Int? = null
         private var autoReconnect: Boolean? = null
@@ -53,6 +55,11 @@ class PusherOptions private constructor(
 
         fun setChannelAuthorizer(authorizer: ChannelAuthorizer): Builder {
             this.channelAuthorizer = authorizer
+            return this
+        }
+
+        fun setAuthEndpoint(authEndpoint: String): Builder {
+            this.authEndpoint = authEndpoint
             return this
         }
 
@@ -103,6 +110,7 @@ class PusherOptions private constructor(
                 cluster = cluster,
                 activityTimeout = activityTimeout,
                 channelAuthorizer = channelAuthorizer,
+                authEndpoint = authEndpoint,
                 maxReconnectGapInSeconds = maxReconnectGapInSeconds,
                 maxReconnectionAttempts = maxReconnectionAttempts,
                 autoReconnect = autoReconnect,

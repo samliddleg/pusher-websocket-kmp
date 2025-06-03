@@ -4,6 +4,9 @@ import cocoapods.PusherSwift.Pusher
 import cocoapods.PusherSwift.PusherDelegateProtocol
 import cocoapods.PusherSwift.PusherError
 import cocoapods.PusherSwift.create
+import cocoapods.PusherSwift.PusherAuth
+import cocoapods.PusherSwift.subscribeWithChannelName
+import cocoapods.PusherSwift.subscribeToPresenceChannelWithChannelName
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSError
@@ -97,13 +100,7 @@ actual class PusherClient actual constructor(apiKey: String, options: PusherOpti
     ) {
         eventCallbacks[channel] = onEvent
         subscribeSuccessCallbacks[channel] = onSuccess
-        pusher.subscribe(
-            channelName = channel,
-            auth = null,
-            onMemberAdded = null,
-            onMemberRemoved = null,
-            onSubscriptionCountChanged = null,
-        )
+        pusher.subscribeWithChannelName(channel)
     }
 
     @OptIn(ExperimentalForeignApi::class)
@@ -125,13 +122,7 @@ actual class PusherClient actual constructor(apiKey: String, options: PusherOpti
         subscribeSuccessCallbacks[channel] = onSuccess
         onAuthenticationFailureCallbacks[channel] = onAuthenticationFailure
 
-        pusher.subscribe(
-            channelName = channel,
-            auth = null,
-            onMemberAdded = null,
-            onMemberRemoved = null,
-            onSubscriptionCountChanged = null,
-        )
+        pusher.subscribeWithChannelName(channel)
     }
 
     actual fun subscribePresence(
@@ -149,9 +140,8 @@ actual class PusherClient actual constructor(apiKey: String, options: PusherOpti
         subscribeSuccessCallbacks[channel] = onSuccess
         onAuthenticationFailureCallbacks[channel] = onAuthenticationFailure
 
-        pusher.subscribe(
+        pusher.subscribeToPresenceChannelWithChannelName(
             channelName = channel,
-            auth = null,
             onMemberAdded = {
                 if (it != null) {
                     userSubscribed(User(id = it.userId(), info = it.userInfo()?.toString()))

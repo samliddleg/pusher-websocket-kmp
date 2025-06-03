@@ -13,53 +13,71 @@ import cocoapods.PusherSwift.PusherClientOptions
 import cocoapods.PusherSwift.create
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.addressOf
+import kotlinx.cinterop.usePinned
 import platform.Foundation.HTTPBody
 import platform.Foundation.HTTPMethod
+import platform.Foundation.NSData
 import platform.Foundation.NSMutableURLRequest
 import platform.Foundation.NSNumber
 import platform.Foundation.NSURL
 import platform.Foundation.NSURLRequest
+import platform.Foundation.dataWithBytes
 import platform.Foundation.setValue
 import platform.darwin.NSObject
 
 @OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
 internal fun PusherOptions.toSwift(): PusherClientOptions {
-    val ocAuthMethod = if (channelAuthorizer is HttpChannelAuthorizer) {
-        OCAuthMethod(authRequestBuilder = object : NSObject(), AuthRequestBuilderProtocolProtocol {
-            override fun requestForSocketID(
-                socketID: String,
-                channelName: String
-            ): NSURLRequest? {
-                val endpoint = channelAuthorizer.endpoint
-                val url = NSURL(string = endpoint)
-                val request = NSMutableURLRequest.requestWithURL(url).apply {
-                    setAllowsCellularAccess(true)
-                    HTTPMethod = "POST"
-                    channelAuthorizer.headers.forEach { (key, value) ->
-                        setValue(value = value, forHTTPHeaderField = key)
-                    }
-                    HTTPBody =
-                        "socket_id=$socketID&channel_name=$channelName".encodeToByteArray().toData()
-                }
-                return request
-            }
-        })
-    } else {
-        OCAuthMethod(authRequestBuilder = object : NSObject(), AuthRequestBuilderProtocolProtocol {
-            override fun requestForSocketID(
-                socketID: String,
-                channelName: String
-            ): NSURLRequest? =
-                channelAuthorizer?.authorize(channelName, socketID)?.let { urlString ->
-                    val url = NSURL(string = urlString)
+    val authProtocol: AuthRequestBuilderProtocolProtocol? = when (channelAuthorizer) {
+        is HttpChannelAuthorizer -> {
+            object : NSObject(), AuthRequestBuilderProtocolProtocol {
+                override fun requestForSocketID(
+                    socketID: String,
+                    channelName: String,
+                ): NSURLRequest? {
+                    val url = NSURL(string = channelAuthorizer.endpoint)
                     val request = NSMutableURLRequest.requestWithURL(url).apply {
                         setAllowsCellularAccess(true)
                         HTTPMethod = "POST"
                     }
-                    request
+                    request.setValue(
+                        "application/x-www-form-urlencoded",
+                        forHTTPHeaderField = "Content-Type"
+                    )
+                    channelAuthorizer.headers().forEach { (key, value) ->
+                        request.setValue(value, forHTTPHeaderField = key)
+                    }
+                    val body = "socket_id=$socketID&channel_name=$channelName"
+                    val data = body.encodeToByteArray().usePinned {
+                        NSData.dataWithBytes(it.addressOf(0), it.get().size.toULong())
+                    }
+                    request.HTTPBody = data
+                    return request
                 }
-        })
+            }
+        }
+
+        is ChannelAuthorizer -> {
+            object : NSObject(), AuthRequestBuilderProtocolProtocol {
+                override fun requestForSocketID(
+                    socketID: String,
+                    channelName: String
+                ): NSURLRequest? {
+                    return channelAuthorizer.authorize(channelName, socketID).let { urlString ->
+                        val url = NSURL(string = urlString)
+                        val request = NSMutableURLRequest.requestWithURL(url).apply {
+                            setAllowsCellularAccess(true)
+                            HTTPMethod = "POST"
+                        }
+                        request
+                    }
+                }
+            }
+        }
+
+        null -> null
     }
+    val ocAuthMethod = authProtocol?.let { OCAuthMethod(authRequestBuilder = it) } ?: OCAuthMethod()
     val ocHost = if (!cluster.isNullOrBlank()) {
         OCPusherHost(cluster = cluster)
     } else if (!host.isNullOrBlank()) {
