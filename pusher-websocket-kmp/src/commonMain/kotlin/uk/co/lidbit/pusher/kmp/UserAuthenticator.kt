@@ -6,7 +6,7 @@ fun interface UserAuthenticator {
 
 }
 
-expect class HttpUserAuthenticator(endpoint: String, headers: Map<String, String> = emptyMap()) :
+expect class HttpUserAuthenticator(endpoint: String, headers: () -> Map<String, String> = emptyMap()) :
     UserAuthenticator {
     override fun authenticate(socketId: String): String
 }

@@ -84,9 +84,11 @@ pusher.subscribe(
 // or create your own using the ChannelAuthorizer interface
 val channelAuthorizer = HttpChannelAuthorizer(
     endpoint = "https://example.domain/broadcasting/auth",
-    headers = mapOf(
-        "Authorization" to "Bearer {token}",
-    ),
+    headers = {
+        mapOf(
+            "Authorization" to "Bearer {token}",
+        )
+    },
 )
 
 val options = PusherOptions.Builder()
@@ -119,9 +121,11 @@ pusher.subscribePrivate(
 // or create your own using the UserAuthenticator interface
 val userAuthenticator = HttpUserAuthenticator(
     endpoint = "https://example.domain/broadcasting/auth",
-    headers = mapOf(
-        "Authorization" to "Bearer {token}",
-    ),
+    headers = {
+        mapOf(
+            "Authorization" to "Bearer {token}",
+        )
+    },
 )
 val options = PusherOptions.Builder()
     .setCluster("YOUR_CLUSTER")
@@ -226,4 +230,3 @@ Inspired by:
 
 - [pusher-websocket-java](https://github.com/pusher/pusher-websocket-java)
 - [pusher-websocket-swift](https://github.com/pusher/pusher-websocket-swift)
-```

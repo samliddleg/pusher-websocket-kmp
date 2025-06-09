@@ -6,12 +6,11 @@ fun interface ChannelAuthorizer {
 
 }
 
-expect abstract class HttpChannelAuthorizer(
+expect class HttpChannelAuthorizer(
     endpoint: String,
+    headers: () -> Map<String, String>,
 ) : ChannelAuthorizer {
 
     override fun authorize(channelName: String, socketId: String): String
-
-    abstract fun headers(): Map<String, String>
 
 }
