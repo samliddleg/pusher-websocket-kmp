@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pusher/NWWebSocket.git",
       "state" : {
-        "revision" : "1e545fcb53966272fc042aa17ae932f11239e00f",
-        "version" : "0.5.4"
+        "revision" : "da32dcf230d9b627a9ef9d79b83605d12b3fbcbd",
+        "version" : "0.5.7"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pusher/pusher-websocket-swift",
       "state" : {
-        "revision" : "886341f9dad453c9822f2525136ee2006a6c3c9e",
-        "version" : "10.1.5"
+        "revision" : "d8d7a776fa92c733891790be6e8d3e3532e79c43",
+        "version" : "10.1.6"
       }
     },
     {

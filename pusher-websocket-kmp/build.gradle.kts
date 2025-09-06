@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "uk.co.lidbit"
-version = "0.1.5"
+version = "0.1.6"
 
 kotlin {
     
@@ -29,7 +29,7 @@ kotlin {
         homepage = "https://github.com/samliddleg/pusher-websocket-kmp"
         ios.deploymentTarget = "13.0"
         pod("PusherSwift") {
-            version = "~> 10.1.5"
+            version = "~> 10.1.6"
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
         framework {

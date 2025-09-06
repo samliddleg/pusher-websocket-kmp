@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/PusherWebsocketKmp.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '13.0'
-    spec.dependency 'PusherSwift', '~> 10.1.5'
+    spec.dependency 'PusherSwift', '~> 10.1.6'
                 
     if !Dir.exist?('build/cocoapods/framework/PusherWebsocketKmp.framework') || Dir.empty?('build/cocoapods/framework/PusherWebsocketKmp.framework')
         raise "
