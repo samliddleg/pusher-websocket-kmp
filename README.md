@@ -35,6 +35,25 @@ kotlin {
 }
 ```
 
+### iOS setup (required)
+
+On iOS this library wraps [PusherSwift](https://github.com/pusher/pusher-websocket-swift)
+via Kotlin/Native `cinterop`. Kotlin compiles bindings against PusherSwift but does not
+bundle its binary, and native framework dependencies are not resolved transitively
+through Gradle/Maven. This means PusherSwift must be present at the final link step of your
+iOS app, so every consuming project has to add it once.
+
+Add PusherSwift to your iOS app with Swift Package Manager:
+
+1. In Xcode, open your app target → **Project → Package Dependencies** (or **General →
+   Frameworks, Libraries, and Embedded Content**).
+2. Add the package `https://github.com/pusher/pusher-websocket-swift` with the
+   **Up to Next Major Version** rule from `10.1.10`.
+3. Add the `PusherSwift` product to your app target.
+
+PusherSwift requires a minimum deployment target of **iOS 13.0**, so make sure your app
+target is set to 13.0 or higher. It only needs to be declared once, in the final iOS app.
+
 ---
 
 ## Usage

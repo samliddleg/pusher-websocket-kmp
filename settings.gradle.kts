@@ -28,5 +28,6 @@ dependencyResolutionManagement {
     }
 }
 
+include(":androidApp")
 include(":example")
 include(":pusher-websocket-kmp")

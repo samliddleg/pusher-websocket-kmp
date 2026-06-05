@@ -10,7 +10,7 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		226EE7642DDBD45700E3CEE6 /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 226EE7632DDBD45700E3CEE6 /* PusherSwift */; };
+		22A9A57D2FD312D600148461 /* PusherSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 22A9A57C2FD312D600148461 /* PusherSwift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				226EE7642DDBD45700E3CEE6 /* PusherSwift in Frameworks */,
+				22A9A57D2FD312D600148461 /* PusherSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +98,9 @@
 			dependencies = (
 			);
 			name = iosApp;
+			packageProductDependencies = (
+				22A9A57C2FD312D600148461 /* PusherSwift */,
+			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* Pusher Websocket KMP.app */;
 			productType = "com.apple.product-type.application";
@@ -128,7 +131,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				226EE7622DDBD45700E3CEE6 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */,
+				22A9A57B2FD312D600148461 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -383,20 +386,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		226EE7622DDBD45700E3CEE6 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */ = {
+		22A9A57B2FD312D600148461 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pusher/pusher-websocket-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.1.5;
+				minimumVersion = 10.1.10;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		226EE7632DDBD45700E3CEE6 /* PusherSwift */ = {
+		22A9A57C2FD312D600148461 /* PusherSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 226EE7622DDBD45700E3CEE6 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */;
+			package = 22A9A57B2FD312D600148461 /* XCRemoteSwiftPackageReference "pusher-websocket-swift" */;
 			productName = PusherSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

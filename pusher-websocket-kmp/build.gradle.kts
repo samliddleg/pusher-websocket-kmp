@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
 
 plugins {
@@ -29,7 +30,7 @@ kotlin {
         homepage = "https://github.com/samliddleg/pusher-websocket-kmp"
         ios.deploymentTarget = "13.0"
         pod("PusherSwift") {
-            version = "~> 10.1.6"
+            version = "~> 10.1.10"
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
         framework {
@@ -39,8 +40,8 @@ kotlin {
     }
 
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
 
