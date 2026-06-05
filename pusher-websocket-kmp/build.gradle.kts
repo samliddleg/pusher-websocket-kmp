@@ -9,12 +9,11 @@ plugins {
 }
 
 group = "uk.co.lidbit"
-version = "0.1.6"
+version = "0.1.7"
 
 kotlin {
     
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->

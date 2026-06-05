@@ -20,7 +20,7 @@ internal fun PusherOptions.toAbstracted() = com.pusher.client.PusherOptions().ap
     this@toAbstracted.cluster?.let {
         setCluster(it)
     }
-    this@toAbstracted.activityTimeout?.let { setActivityTimeout(it) }
+    this@toAbstracted.activityTimeout?.let { setActivityTimeout(it.inWholeMilliseconds) }
     this@toAbstracted.channelAuthorizer?.let {
         setChannelAuthorizer { channelName, socketId -> it.authorize(channelName, socketId) }
     }

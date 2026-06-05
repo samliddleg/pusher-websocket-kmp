@@ -92,7 +92,7 @@ internal fun PusherOptions.toSwift(): PusherClientOptions {
         ocHost = ocHost,
         port = (if (useTLS == true) wssPort else wsPort)?.let { NSNumber(it) },
         useTLS = useTLS == true,
-        activityTimeout = activityTimeout?.let { NSNumber(long = it) },
+        activityTimeout = activityTimeout?.let { NSNumber(long = it.inWholeSeconds) },
     )
 }
 

@@ -1,6 +1,7 @@
 # pusher-websocket-kmp
 
-A Kotlin Multiplatform library for working with [Pusher Channels](https://pusher.com/channels), providing real-time WebSocket support across Android, iOS, and desktop targets.
+A Kotlin Multiplatform library for working with [Pusher Channels](https://pusher.com/channels),
+providing real-time WebSocket support across Android, iOS, and desktop targets.
 
 ---
 
@@ -22,16 +23,16 @@ Add the library to your Kotlin Multiplatform project.
 ```kotlin
 // build.gradle.kts (project)
 repositories {
-    mavenCentral()
+   mavenCentral()
 }
 
 // build.gradle.kts (shared module)
 kotlin {
-    sourceSets {
-        val commonMain.dependencies {
-            implementation("uk.co.lidbit:pusher-websocket-kmp:<latest-version>")
-        }
-    }
+   sourceSets {
+      commonMain.dependencies {
+         implementation("uk.co.lidbit:pusher-websocket-kmp:<latest-version>")
+      }
+   }
 }
 ```
 
@@ -201,23 +202,24 @@ pusher.disconnect()
 
 ### Configuration Options
 
-You can customize the `PusherOptions` using the `Builder` class. Below is a list of available configuration options:
+You can customize the `PusherOptions` using the `Builder` class. Below is a list of available
+configuration options:
 
-| Option                                | JVM | iOS | Description                                                                 |
-|---------------------------------------|:---:|:---:|-----------------------------------------------------------------------------|
-| `setHost(host: String)`               | ✅  | ✅  | Connect to a custom host instead of using a cluster.                       |
-| `setCluster(cluster: String)`         | ✅  | ✅  | Use a predefined Pusher cluster (e.g., `"eu"`). Ignored if `host` is set.  |
-| `setProxy(proxy: Proxy)`              | ✅  | ❌  | Set a proxy for WebSocket connections.                                     |
-| `setActivityTimeout(timeout: Long)`   | ✅  | ✅  | Time in ms after which a ping is sent if no activity is detected.          |
-| `setPongTimeout(timeout: Long)`       | ✅  | ❌  | Time in ms to wait for a pong after sending a ping.                        |
-| `setAutoReconnect(autoReconnect: Boolean)` | ✅  | ✅  | Automatically reconnect after disconnection.                          |
-| `setMaxReconnectGapInSeconds(seconds: Int)` | ✅  | ❌  | Max delay between reconnection attempts.                             |
-| `setMaxReconnectionAttempts(attempts: Int)` | ✅  | ❌  | Max number of reconnection attempts before giving up.               |
-| `setUseTls(useTLS: Boolean)`          | ✅  | ✅  | Use secure WebSocket (WSS) connections.                                    |
-| `setChannelAuthorizer(authorizer: ChannelAuthorizer)` | ✅  | ✅  | Custom authorizer for **private** channels.                |
-| `setUserAuthenticator(authenticator: UserAuthenticator)` | ✅  | ✅  | Custom authenticator for **presence** channels.         |
-| `setWsPort(port: Int)`                | ✅  | ✅  | Override default unencrypted WebSocket port (80).                  |
-| `setWssPort(port: Int)`               | ✅  | ✅  | Override default encrypted WebSocket port (443).                   |
+| Option                                                   | JVM | iOS | Description                                                               |
+|----------------------------------------------------------|:---:|:---:|---------------------------------------------------------------------------|
+| `setHost(host: String)`                                  |  ✅  |  ✅  | Connect to a custom host instead of using a cluster.                      |
+| `setCluster(cluster: String)`                            |  ✅  |  ✅  | Use a predefined Pusher cluster (e.g., `"eu"`). Ignored if `host` is set. |
+| `setProxy(proxy: Proxy)`                                 |  ✅  |  ❌  | Set a proxy for WebSocket connections.                                    |
+| `setActivityTimeout(timeout: Duration)`                  |  ✅  |  ✅  | Time until a ping is sent if no activity is detected.                     |
+| `setPongTimeout(timeout: Long)`                          |  ✅  |  ❌  | Time in ms to wait for a pong after sending a ping.                       |
+| `setAutoReconnect(autoReconnect: Boolean)`               |  ✅  |  ✅  | Automatically reconnect after disconnection.                              |
+| `setMaxReconnectGapInSeconds(seconds: Int)`              |  ✅  |  ❌  | Max delay between reconnection attempts.                                  |
+| `setMaxReconnectionAttempts(attempts: Int)`              |  ✅  |  ❌  | Max number of reconnection attempts before giving up.                     |
+| `setUseTls(useTLS: Boolean)`                             |  ✅  |  ✅  | Use secure WebSocket (WSS) connections.                                   |
+| `setChannelAuthorizer(authorizer: ChannelAuthorizer)`    |  ✅  |  ✅  | Custom authorizer for **private** channels.                               |
+| `setUserAuthenticator(authenticator: UserAuthenticator)` |  ✅  |  ✅  | Custom authenticator for **presence** channels.                           |
+| `setWsPort(port: Int)`                                   |  ✅  |  ✅  | Override default unencrypted WebSocket port (80).                         |
+| `setWssPort(port: Int)`                                  |  ✅  |  ✅  | Override default encrypted WebSocket port (443).                          |
 
 ---
 

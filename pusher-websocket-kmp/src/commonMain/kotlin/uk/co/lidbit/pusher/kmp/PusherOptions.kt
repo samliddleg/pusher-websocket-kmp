@@ -1,10 +1,12 @@
 package uk.co.lidbit.pusher.kmp
 
+import kotlin.time.Duration
+
 class PusherOptions private constructor(
     val host: String?,
     val proxy: Proxy?,
     val cluster: String?,
-    val activityTimeout: Long?,
+    val activityTimeout: Duration?,
     val channelAuthorizer: ChannelAuthorizer?,
     val maxReconnectGapInSeconds: Int?,
     val maxReconnectionAttempts: Int?,
@@ -20,7 +22,7 @@ class PusherOptions private constructor(
         private var host: String? = null
         private var proxy: Proxy? = null
         private var cluster: String? = null
-        private var activityTimeout: Long? = null
+        private var activityTimeout: Duration? = null
         private var channelAuthorizer: ChannelAuthorizer? = null
         private var authEndpoint: String? = null
         private var maxReconnectGapInSeconds: Int? = null
@@ -47,7 +49,7 @@ class PusherOptions private constructor(
             return this
         }
 
-        fun setActivityTimeout(timeout: Long): Builder {
+        fun setActivityTimeout(timeout: Duration): Builder {
             this.activityTimeout = timeout
             return this
         }
